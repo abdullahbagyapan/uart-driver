@@ -4,7 +4,11 @@
  @date:   04/04/2024
 */
 
+/*================================== Defined Variables ==================================*/
 
+#define BAUD_RATE   115200
+#define F_CPU       16000000UL
+#define UBRR        F_CPU / 16 / BAUD_RATE - 1
 
 /*================================== Functions ==================================*/
 
@@ -18,9 +22,9 @@
 
  @param   None
 
- @return  If there is no error return 0, otherwise non-zero
+ @return  None
 */
-uint8_t UART_Init();
+void UART_Init();
 
 
 
@@ -33,6 +37,6 @@ uint8_t UART_Init();
 
  @param   The character to send to polling
 
- @return  If there is no error return 0, otherwise non-zero
+ @return  None
 */
-uint8_t UART_PutCharPolling(uint8_t ui8Char);
+void UART_PutChar(char cData);
