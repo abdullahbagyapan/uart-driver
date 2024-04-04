@@ -6,7 +6,7 @@
 
 
 
-
+/*================================== Functions ==================================*/
 
 
 /*
@@ -21,3 +21,18 @@
  @return  If there is no error return 0, otherwise non-zero
 */
 uint8_t UART_Init();
+
+
+
+/*
+ @brief:  Send char to polling
+
+ @author  Abdullah Bagyapan
+
+ @date    04/04/2024
+
+ @param   The character to send to polling
+
+ @return  If there is no error return 0, otherwise non-zero
+*/
+uint8_t UART_PutCharPolling(uint8_t ui8Char);
