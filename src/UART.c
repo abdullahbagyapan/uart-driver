@@ -25,8 +25,8 @@ void UART_Init() {
     // Operation mode: Asynchronous USART
     UCSR0C &= ~_BV(UMSEL00) | ~_BV(UMSEL01);
     
-    // Set normal mode
-    UCSR0A &= ~_BV(U2X0);
+    // Set 2X mode
+    UCSR0A &= _BV(U2X0);
 
     // Set baudrate
     UBRR0H = (uint8_t)(UBRR >> 8);
@@ -35,8 +35,8 @@ void UART_Init() {
     // Set frame format: 8data, 1stop bit
     UCSR0C |= _BV(UCSZ00) | _BV(UCSZ01) | _BV(USBS0);
     
-    // Enable transmitter
-    UCSR0B |= _BV(TXEN0) | _BV(TXCIE0);
+    // Enable transmitter and receiver
+    UCSR0B |= _BV(TXEN0) | _BV(RXEN0);
 
 }
 
@@ -49,5 +49,17 @@ void UART_PutChar(char cData) {
 
     // Put data into buffer
     UDR0 = cData;
+
+}
+
+
+
+uint8_t UART_GetChar(void) {
+
+    // Wait for data to be received
+    while (!(UCSR0A & (1<<RXC0)));
+
+    // Get received data from buffer
+    return UDR0;
 
 }

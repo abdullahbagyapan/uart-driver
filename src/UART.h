@@ -6,9 +6,9 @@
 
 /*================================== Defined Variables ==================================*/
 
-#define BAUD_RATE   115200
+#define BAUD        115200
 #define F_CPU       16000000UL
-#define UBRR        F_CPU / 16 / BAUD_RATE - 1
+#define UBRR        F_CPU / 8 / BAUD - 1
 
 /*================================== Functions ==================================*/
 
@@ -29,14 +29,30 @@ void UART_Init();
 
 
 /*
- @brief:  Send char to polling
+ @brief:  Send char to TX buffer
 
  @author  Abdullah Bagyapan
 
  @date    04/04/2024
 
- @param   The character to send to polling
+ @param   The character to send to TX buffer
 
  @return  None
 */
 void UART_PutChar(char cData);
+
+
+
+
+/*
+ @brief:  Get char from RX buffer
+
+ @author  Abdullah Bagyapan
+
+ @date    05/04/2024
+
+ @param   None
+
+ @return  The character from RX buffer
+*/
+uint8_t UART_GetChar(void);
