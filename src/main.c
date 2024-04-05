@@ -1,14 +1,18 @@
 #include "UART.c"
-#include <util/delay.h>
+
 
 int main() {
 
     UART_Init();
 
+    UART_PutChar('A');
+    
     while (1) {
-        
-        UART_PutChar('A');
-        _delay_ms(100);
+
+        // Loopback
+        uint8_t ui8Data = UART_GetChar();
+        UART_PutChar(ui8Data);
+
     }
 
     return 0;
