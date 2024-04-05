@@ -26,7 +26,7 @@ void UART_Init() {
     UCSR0C &= ~_BV(UMSEL00) | ~_BV(UMSEL01);
     
     // Set 2X mode
-    UCSR0A &= _BV(U2X0);
+    UCSR0A |= _BV(U2X0);
 
     // Set baudrate
     UBRR0H = (uint8_t)(UBRR >> 8);
