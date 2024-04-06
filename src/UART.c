@@ -35,6 +35,9 @@ void UART_Init() {
     // Enable transmitter and receiver
     UCSR0B |= _BV(TXEN0) | _BV(RXEN0);
 
+    // Enable interrupt for RX complete
+    UCSR0B |= _BV(RXCIE0);
+
 }
 
 
