@@ -1,4 +1,4 @@
-#include "uart/UART.c"
+#include "uart/UART.h"
 
 
 int main() {
@@ -6,14 +6,11 @@ int main() {
     UART_Init();
 
     UART_PutChar('A');
-    
-    while (1) {
+    UART_PutChar('B');
+    UART_PutChar('C');
 
-        // Loopback
-        uint8_t ui8Data = UART_GetChar();
-        UART_PutChar(ui8Data);
 
-    }
+    while (1) {}
 
     return 0;
 }
