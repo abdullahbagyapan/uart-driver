@@ -13,6 +13,7 @@
 
 // AVR libraries
 #include <avr/io.h>
+#include <avr/interrupt.h>
 
 
 
@@ -62,4 +63,25 @@ uint8_t UART_GetChar(void) {
     // Get received data from buffer
     return UDR0;
 
+}
+
+
+/*
+ @brief:  Interrupt Handler - UART Rx Complete
+
+ @author  Abdullah Bagyapan
+
+ @date    06/04/2024
+
+ @details If interrupt happens, loopback received data
+
+ @param   None
+
+ @return  None
+*/
+ISR(USART_RX_vect)
+{
+	uint8_t ui8Data = UDR0;
+
+    UART_PutChar(ui8Data);
 }
