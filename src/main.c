@@ -5,12 +5,15 @@ int main() {
 
     UART_Init();
 
-    UART_PutChar('A');
-    UART_PutChar('B');
-    UART_PutChar('C');
 
+    while (1) {
+        UART_PutChar('A');
+        UART_PutChar('B');
+        UART_PutChar('C');
 
-    while (1) {}
+        UART_PutChar('\r');
+        UART_PutChar('\n');
+    }
 
     return 0;
 }
