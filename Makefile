@@ -15,7 +15,7 @@
 
 # parameters (change this stuff accordingly)
 # project name
-PRJ = main
+PRJ = src/main
 # avr mcu
 MCU = atmega328p
 # mcu clock frequency
@@ -33,7 +33,7 @@ EFU = 0x05
 SRC = $(PRJ).cpp
 # where to look for external libraries (consisting of .c/.cpp files and .h files)
 # e.g. EXT = ../../EyeToSee ../../YouSART
-EXT = src
+EXT = uart
 
 
 #################################################################################################
@@ -43,7 +43,7 @@ EXT = src
 # include path
 INCLUDE := $(foreach dir, $(EXT), -I$(dir))
 # c flags
-CFLAGS    = -Wall -Werror -Wpedantic -Os -DF_CPU=$(CLK) -mmcu=$(MCU) $(INCLUDE)
+CFLAGS    = -Wall -Werror -Wpedantic -Os -mmcu=$(MCU) $(INCLUDE)
 # any aditional flags for c++
 CPPFLAGS =
 
