@@ -27,7 +27,7 @@ void UART_Init() {
     
     // Set baudrate
     UBRR0H = (uint8_t)((UBRR - 8) >> 8);
-    UBRR0L = (uint8_t) UBRR;
+    UBRR0L = (uint8_t)(UBRR);
 
     // Set frame format: 8data, 1stop bit
     UCSR0C |= _BV(UCSZ00) | _BV(UCSZ01) | _BV(USBS0);
