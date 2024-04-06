@@ -19,16 +19,6 @@
 #define UBRR        F_CPU / 16 / BAUD - 1
 
 
-#define UART_BUFFER_SIZE 255
-
-
-typedef struct UART_BUFFER
-{    
-    uint8_t ui8Buffer[UART_BUFFER_SIZE]; 
-    uint8_t ui8Head;
-    uint8_t ui8Tail;
-};
-
 /*================================== Functions ==================================*/
 
 
