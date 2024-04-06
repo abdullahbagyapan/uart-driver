@@ -129,3 +129,33 @@ To run we can use following line:
 ```bash
 make flash
 ```
+
+## Testing
+
+To testing our UART driver we can use USB to TTL converter.
+
+### Cable Connections
+
+<img src="Picture/FTDI-USB-to-serial-converter.png">
+
+- **GND**: Connect it with ground pin of Arduino UNO
+- **VCC**: Connect it with VCC pin
+- **TxD**: Connect it with RX pin of Arduino UNO
+- **RxD**: Connect it with TX pin of Arduino UNO
+
+> **Note !** \
+The cable connections may change depends on your converter. \
+Other 2 pins is not necessary right now.
+
+
+### Connect FTDI
+
+To connect FTDI, run below code:
+
+```bash
+screen /dev/ttyUSB1 38400
+```
+
+Now you can see the outputs.
+
+<img src="Picture/FTDI-outputs.png">
