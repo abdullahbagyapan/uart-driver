@@ -33,7 +33,7 @@ EFU = 0x05
 SRC = $(PRJ).cpp
 # where to look for external libraries (consisting of .c/.cpp files and .h files)
 # e.g. EXT = ../../EyeToSee ../../YouSART
-EXT = uart
+EXT = src/uart
 
 
 #################################################################################################
