@@ -16,7 +16,7 @@
 
 #define BAUD        38400
 #define F_CPU       16000000UL
-#define UBRR        (((F_CPU) + 8UL * (BAUD)) / (16UL * (BAUD)) - 1UL)
+#define UBRR        F_CPU / 16U / BAUD - 1U
 
 
 /*================================== Functions ==================================*/
