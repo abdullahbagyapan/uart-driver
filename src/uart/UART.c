@@ -13,7 +13,6 @@
 
 // AVR libraries
 #include <avr/io.h>
-#include <avr/interrupt.h>
 
 
 
@@ -35,9 +34,6 @@ void UART_Init() {
     
     // Enable transmitter and receiver
     UCSR0B |= _BV(TXEN0) | _BV(RXEN0);
-
-    // Enable interrupt for RX complete
-    UCSR0B |= _BV(RXCIE0);
 
 }
 
@@ -63,25 +59,4 @@ uint8_t UART_GetChar(void) {
     // Get received data from buffer
     return UDR0;
 
-}
-
-
-/*
- @brief:  Interrupt Handler - UART Rx Complete
-
- @author  Abdullah Bagyapan
-
- @date    06/04/2024
-
- @details If interrupt happens, loopback received data
-
- @param   None
-
- @return  None
-*/
-ISR(USART_RX_vect)
-{
-	uint8_t ui8Data = UDR0;
-
-    UART_PutChar(ui8Data);
 }
