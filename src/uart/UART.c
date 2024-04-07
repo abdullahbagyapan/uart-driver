@@ -47,6 +47,9 @@ static void _UART_TX_Start(void) {
 
     ui8Data = UART_RingBufferGet(&_UART_RING_BUFFER);
 
+    // wait until transmission complete
+    while (!( UCSR0A & (1<<UDRE0)));
+
     // Put data into buffer
     UDR0 = ui8Data;
 
@@ -55,6 +58,7 @@ static void _UART_TX_Start(void) {
 
 
 /************ Public Functions ************/
+
 
 void UART_Init() {
 
@@ -168,15 +172,11 @@ uint8_t UART_RingBufferEmpty(const struct UART_RING_BUFFER *pRingBuffer) {
 /************ Interrupt Handler Functions ************/
 
 
-ISR(USART_TX_vect)
+// UART RX Complete
+ISR(USART_RX_vect)
 {
+	uint8_t ui8Data = UDR0;
 
-    // clear transmitted data
-    UART_RingBufferGet(&_UART_RING_BUFFER);
-
-
-    if (!UART_RingBufferEmpty(&_UART_RING_BUFFER)) {
-        _UART_TX_Start();
-    }
-
+    // loopback
+    UART_PutChar(ui8Data);
 }
