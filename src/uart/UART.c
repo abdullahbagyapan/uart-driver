@@ -28,7 +28,7 @@ static struct UART_RING_BUFFER _UART_RING_BUFFER = {.ui8Head = 0, .ui8Tail = 0};
 /************ Private Functions ************/
 
 
-static void _UART_TX_Start(struct UART_RING_BUFFER *pRingBuffer) {
+static void _UART_TX_Start(void) {
 
     uint8_t ui8Data;
 
@@ -70,11 +70,15 @@ void UART_Init() {
 
 void UART_PutChar(char cData) {
 
-    // Wait for empty transmit buffer
-    while (!(UCSR0A & (1<<UDRE0)));
+    const uint8_t ui8IsTXOngoing = !UART_RingBufferEmpty(&_UART_RING_BUFFER);
 
-    // Put data into buffer
-    UDR0 = cData;
+    UART_RingBufferPut(&_UART_RING_BUFFER,cData);
+
+    // if transmit is not happening, start transmitting
+    if (!ui8IsTXOngoing) {
+
+        _UART_TX_Start();
+    }
 
 }
 
@@ -159,7 +163,7 @@ ISR(USART_TX_vect)
 
 
     if (!UART_RingBufferEmpty(&_UART_RING_BUFFER)) {
-        UART_TX_Start();
+        _UART_TX_Start();
     }
 
 }

@@ -20,7 +20,7 @@
 
 #define UART_RING_BUFFER_SIZE    255
 
-typedef struct UART_RING_BUFFER
+struct UART_RING_BUFFER
 {
     uint8_t buffer[UART_RING_BUFFER_SIZE];
     uint8_t ui8Head;
