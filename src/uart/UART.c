@@ -15,6 +15,11 @@
 #include <avr/io.h>
 
 
+/*================================== Variables ==================================*/
+
+
+static struct UART_RING_BUFFER _UART_RING_BUFFER = {.ui8Head = 0, .ui8Tail = 0};
+
 
 /*================================== Functions ==================================*/
 
@@ -58,5 +63,62 @@ uint8_t UART_GetChar(void) {
 
     // Get received data from buffer
     return UDR0;
+
+}
+
+
+
+uint8_t UART_RingBufferGet(struct UART_RING_BUFFER *pRingBuffer) {
+
+    const uint8_t ui8data = pRingBuffer->buffer[pRingBuffer->ui8Tail];
+    pRingBuffer->ui8Tail++;
+
+    // if tail points end of the buffer, set tail to index 0
+    if (pRingBuffer->ui8Tail == UART_RING_BUFFER_SIZE) {
+        pRingBuffer->ui8Tail = 0;
+    }
+
+    return ui8data;
+}
+
+
+void UART_RingBufferPut(struct UART_RING_BUFFER *pRingBuffer, uint8_t ui8Data) {
+    
+    pRingBuffer->buffer[pRingBuffer->ui8Head] = ui8Data;
+    pRingBuffer->ui8Head++;
+
+    // if head points end of the buffer, set head to index 0
+    if (pRingBuffer->ui8Head == UART_RING_BUFFER_SIZE) {
+        pRingBuffer->ui8Head = 0;
+    }
+}
+
+
+uint8_t UART_RingBufferFull(const struct UART_RING_BUFFER *pRingBuffer) {
+
+    uint8_t ui8IsRingBufferFull;
+
+    uint8_t ui8IndexAfterHead = pRingBuffer->ui8Head;
+
+    // if next index of head points end of the buffer, set it to index 0
+    if (ui8IndexAfterHead == UART_RING_BUFFER_SIZE) {
+        ui8IndexAfterHead = 0;
+    }
+
+    // if next index of head equals tail, there is no space for more character
+    ui8IsRingBufferFull = ui8IndexAfterHead == pRingBuffer->ui8Tail;
+
+    return ui8IsRingBufferFull;
+}
+
+
+uint8_t UART_RingBufferEmpty(const struct UART_RING_BUFFER *pRingBuffer) {
+
+    uint8_t ui8IsRingBufferEmpty;
+
+    // if head index and tail index same, there is no characters to put ring buffer before
+    ui8IsRingBufferEmpty = pRingBuffer->ui8Head == pRingBuffer->ui8Tail;
+
+    return ui8IsRingBufferEmpty;
 
 }
