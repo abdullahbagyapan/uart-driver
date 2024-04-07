@@ -13,6 +13,7 @@
 
 // AVR libraries
 #include <avr/io.h>
+#include <avr/interrupt.h>
 
 
 /*================================== Variables ==================================*/
@@ -24,6 +25,23 @@ static struct UART_RING_BUFFER _UART_RING_BUFFER = {.ui8Head = 0, .ui8Tail = 0};
 /*================================== Functions ==================================*/
 
 
+/************ Private Functions ************/
+
+
+static void _UART_TX_Start(struct UART_RING_BUFFER *pRingBuffer) {
+
+    uint8_t ui8Data;
+
+    ui8Data = UART_RingBufferGet(&_UART_RING_BUFFER);
+
+    // Put data into buffer
+    UDR0 = ui8Data;
+
+}
+
+
+
+/************ Public Functions ************/
 
 void UART_Init() {
 
@@ -39,6 +57,12 @@ void UART_Init() {
     
     // Enable transmitter and receiver
     UCSR0B |= _BV(TXEN0) | _BV(RXEN0);
+
+    // Enable TX interrupt
+    UCSR0B |= _BV(TXCIE0);
+
+    // Enable RX interrupt
+    UCSR0B |= _BV(RXCIE0);
 
 }
 
@@ -120,5 +144,22 @@ uint8_t UART_RingBufferEmpty(const struct UART_RING_BUFFER *pRingBuffer) {
     ui8IsRingBufferEmpty = pRingBuffer->ui8Head == pRingBuffer->ui8Tail;
 
     return ui8IsRingBufferEmpty;
+
+}
+
+
+/************ Interrupt Handler Functions ************/
+
+
+ISR(USART_TX_vect)
+{
+
+    // clear transmitted data
+    UART_RingBufferGet(&_UART_RING_BUFFER);
+
+
+    if (!UART_RingBufferEmpty(&_UART_RING_BUFFER)) {
+        UART_TX_Start();
+    }
 
 }
