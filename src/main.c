@@ -1,19 +1,15 @@
 #include "uart/UART.h"
+#include <avr/interrupt.h>
 
 
 int main() {
 
     UART_Init();
 
+    // Enable global interrupts
+    sei();
 
-    while (1) {
-        UART_PutChar('A');
-        UART_PutChar('B');
-        UART_PutChar('C');
-
-        UART_PutChar('\r');
-        UART_PutChar('\n');
-    }
+    while (1) {}
 
     return 0;
 }
