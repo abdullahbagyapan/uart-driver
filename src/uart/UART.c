@@ -28,6 +28,19 @@ static struct UART_RING_BUFFER _UART_RING_BUFFER = {.ui8Head = 0, .ui8Tail = 0};
 /************ Private Functions ************/
 
 
+/*
+ @brief:  Start UART transmission
+
+ @author  Abdullah Bagyapan
+
+ @date    07/04/2024
+
+ @param   None
+
+ @details Get data from ring buffer, then put it into TX register
+
+ @return  None
+*/
 static void _UART_TX_Start(void) {
 
     uint8_t ui8Data;
