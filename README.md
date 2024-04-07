@@ -35,7 +35,7 @@ Both UARTs must operate at about the same baud rate. The baud rate between the t
 
 Both UARTs also must be configured to transmit and receive the same data packet structure.
 
-<img src="Picture/UART-communication-specifications-table.png">
+<img src="img/UART-communication-specifications-table.png">
 
 
 ### How UART Works
@@ -45,7 +45,7 @@ The UART that is going to transmit data receives the data from a **data bus**. T
 UART transmitted data is organized into **packets**. Each packet contains 1 start bit, 5 to 9 data bits (depending on the UART), an optional parity bit, and 1 or 2 stop bits:
 
 
-<img src="Picture/UART-packet-frame.png">
+<img src="img/UART-packet-frame.png">
 
 
 After basics of UART, let's learn how UART works on Arduino.
@@ -56,7 +56,7 @@ After basics of UART, let's learn how UART works on Arduino.
 
 To get output and send input we need to focus on **TX** (PD-1) and **RX** (PD-0) which these are data bus for communications.
 
-<img src="Picture/arduino-pinout.png">
+<img src="img/arduino-pinout.png">
 
 
 ## Registers
@@ -69,11 +69,11 @@ To set-up UART on ATmega328P we need to configure some registers.
 
 To set operation mode and frame format
 
-<img src="Picture/arduino-ucsrnc-register.png">
+<img src="img/arduino-ucsrnc-register.png">
 
-<img src="Picture/arduino-ucsrnc-umsel-bits.png">
+<img src="img/arduino-ucsrnc-umsel-bits.png">
 
-<img src="Picture/arduino-ucsrnc-usbs-bits.png">
+<img src="img/arduino-ucsrnc-usbs-bits.png">
 
 ----
 
@@ -81,9 +81,9 @@ To set operation mode and frame format
 
 To enable transmitting and receiving
 
-<img src="Picture/arduino-ucsrnb-register.png">
+<img src="img/arduino-ucsrnb-register.png">
 
-<img src="Picture/arduino-ucsrnb-rx-and-tx-bits.png">
+<img src="img/arduino-ucsrnb-rx-and-tx-bits.png">
 
 ----
 
@@ -91,7 +91,7 @@ To enable transmitting and receiving
 
 To set baudrate
 
-<img src="Picture/arduino-baudrate-register.png">
+<img src="img/arduino-baudrate-register.png">
 
 ----
 
@@ -100,7 +100,7 @@ To set baudrate
 
 To calculate ubrr value
 
-<img src="Picture/arduino-ubrr-calculation.png">
+<img src="img/arduino-ubrr-calculation.png">
 
 ----
 
@@ -108,7 +108,7 @@ To calculate ubrr value
 
 To control status of UART 
 
-<img src="Picture/arduino-ucsrna-register.png">
+<img src="img/arduino-ucsrna-register.png">
 
 ----
 
@@ -116,7 +116,7 @@ To control status of UART
 
 To write/read data from UART
 
-<img src="Picture/arduino-udrn-register.png">
+<img src="img/arduino-udrn-register.png">
 
 ----
 
@@ -136,7 +136,7 @@ To testing our UART driver we can use USB to TTL converter.
 
 ### Cable Connections
 
-<img src="Picture/FTDI-USB-to-serial-converter.png">
+<img src="img/FTDI-USB-to-serial-converter.png">
 
 - **GND**: Connect it with ground pin of Arduino UNO
 - **VCC**: Connect it with VCC pin
@@ -158,4 +158,4 @@ screen /dev/ttyUSB1 38400
 
 Now you can see the outputs.
 
-<img src="Picture/FTDI-outputs.png">
+<img src="img/FTDI-outputs.png">
