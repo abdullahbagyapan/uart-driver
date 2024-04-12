@@ -9,7 +9,9 @@ int main() {
     // Enable global interrupts
     sei();
 
-    while (1) {}
+    UART_PutString("Hello World \r\n");
+    
+    while (1) {};
 
     return 0;
 }

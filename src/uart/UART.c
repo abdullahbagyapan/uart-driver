@@ -101,6 +101,20 @@ void UART_PutChar(char cData) {
 
 
 
+void UART_PutString(char *pData) {
+
+    // Iterate until string termination character('\0')
+    while (*pData != '\0') {
+
+        UART_PutChar(*pData);
+
+        pData++;
+    }
+
+}
+
+
+
 uint8_t UART_GetChar(void) {
 
     // Wait for data to be received
@@ -179,4 +193,11 @@ ISR(USART_RX_vect)
 
     // loopback
     UART_PutChar(ui8Data);
+}
+
+
+// UART TX Complete
+ISR(USART_TX_vect)
+{
+
 }

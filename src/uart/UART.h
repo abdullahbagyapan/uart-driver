@@ -60,6 +60,18 @@ void UART_Init();
 void UART_PutChar(char cData);
 
 
+/*
+ @brief:  Send string to TX buffer
+
+ @author  Abdullah Bagyapan
+
+ @date    12/04/2024
+
+ @param   The string to send to TX buffer
+
+ @return  None
+*/
+void UART_PutString(char *pData);
 
 
 /*
